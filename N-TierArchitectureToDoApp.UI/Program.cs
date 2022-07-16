@@ -1,7 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using N_TierArchitectureToDoApp.DataDomain.DbContexts;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddDbContext<ToDoAppDbContext>(options => options.UseSqlServer(builder.Configuration.GetValue<string>("DatabaseSettings:ConnectionString")), ServiceLifetime.Scoped);
 
 var app = builder.Build();
 
