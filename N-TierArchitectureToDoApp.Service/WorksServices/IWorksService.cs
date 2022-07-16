@@ -10,8 +10,8 @@ namespace N_TierArchitectureToDoApp.Service.WorksServices
 {
     public interface IWorksService
     {
-        Task<int> Add(WorksAddRequest request);
-        Task UpdateById(int id, WorksUpdateByIdRequest request);
+        Task Add(WorksAddRequest request);
+        Task UpdateById(WorksUpdateByIdRequest request);
         Task DeleteById(int id);
         Task<WorksGetByIdResult> GetById(int id);
         Task<List<WorksListResult>> GetAll();

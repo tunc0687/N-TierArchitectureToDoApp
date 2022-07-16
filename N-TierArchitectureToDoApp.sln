@@ -11,15 +11,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{5452
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{F033AB7D-32F8-4880-BE80-2F0B4A1A25D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N-TierArchitectureToDoApp.Core", "N-TierArchitectureToDoApp.Core\N-TierArchitectureToDoApp.Core.csproj", "{6B635509-EBE8-421E-888A-24A077EC035D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "N-TierArchitectureToDoApp.Core", "N-TierArchitectureToDoApp.Core\N-TierArchitectureToDoApp.Core.csproj", "{6B635509-EBE8-421E-888A-24A077EC035D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N-TierArchitectureToDoApp.Data", "N-TierArchitectureToDoApp.Data\N-TierArchitectureToDoApp.Data.csproj", "{25D9685E-0C75-4E88-92F1-7D91C77FED38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "N-TierArchitectureToDoApp.Data", "N-TierArchitectureToDoApp.Data\N-TierArchitectureToDoApp.Data.csproj", "{25D9685E-0C75-4E88-92F1-7D91C77FED38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N-TierArchitectureToDoApp.DataDomain", "N-TierArchitectureToDoApp.DataDomain\N-TierArchitectureToDoApp.DataDomain.csproj", "{24F26CA3-2649-4A78-A452-22A5013EC4D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "N-TierArchitectureToDoApp.DataDomain", "N-TierArchitectureToDoApp.DataDomain\N-TierArchitectureToDoApp.DataDomain.csproj", "{24F26CA3-2649-4A78-A452-22A5013EC4D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N-TierArchitectureToDoApp.Service", "N-TierArchitectureToDoApp.Service\N-TierArchitectureToDoApp.Service.csproj", "{B3A56D9C-61A1-4DDD-9EEB-905A98AFC4E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "N-TierArchitectureToDoApp.Service", "N-TierArchitectureToDoApp.Service\N-TierArchitectureToDoApp.Service.csproj", "{B3A56D9C-61A1-4DDD-9EEB-905A98AFC4E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N-TierArchitectureToDoApp.UI", "N-TierArchitectureToDoApp.UI\N-TierArchitectureToDoApp.UI.csproj", "{50ADF8E6-D491-429F-BFF1-CCA5E2688AA2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N-TierArchitectureToDoApp.UI", "N-TierArchitectureToDoApp.UI\N-TierArchitectureToDoApp.UI.csproj", "{BF642130-C48D-4CAB-9BB5-2BBC7C170038}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,10 +43,10 @@ Global
 		{B3A56D9C-61A1-4DDD-9EEB-905A98AFC4E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3A56D9C-61A1-4DDD-9EEB-905A98AFC4E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3A56D9C-61A1-4DDD-9EEB-905A98AFC4E2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{50ADF8E6-D491-429F-BFF1-CCA5E2688AA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{50ADF8E6-D491-429F-BFF1-CCA5E2688AA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{50ADF8E6-D491-429F-BFF1-CCA5E2688AA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{50ADF8E6-D491-429F-BFF1-CCA5E2688AA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF642130-C48D-4CAB-9BB5-2BBC7C170038}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF642130-C48D-4CAB-9BB5-2BBC7C170038}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF642130-C48D-4CAB-9BB5-2BBC7C170038}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF642130-C48D-4CAB-9BB5-2BBC7C170038}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,7 +56,7 @@ Global
 		{25D9685E-0C75-4E88-92F1-7D91C77FED38} = {882EEA92-BEA1-4804-AEE3-115414821AE3}
 		{24F26CA3-2649-4A78-A452-22A5013EC4D6} = {882EEA92-BEA1-4804-AEE3-115414821AE3}
 		{B3A56D9C-61A1-4DDD-9EEB-905A98AFC4E2} = {545251C5-684D-461A-829C-6F7A7959D01D}
-		{50ADF8E6-D491-429F-BFF1-CCA5E2688AA2} = {F033AB7D-32F8-4880-BE80-2F0B4A1A25D4}
+		{BF642130-C48D-4CAB-9BB5-2BBC7C170038} = {F033AB7D-32F8-4880-BE80-2F0B4A1A25D4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0140FAC6-DDB6-471C-8BD2-B5A537E1000F}

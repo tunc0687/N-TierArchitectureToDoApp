@@ -19,9 +19,9 @@ namespace N_TierArchitectureToDoApp.DataDomain.EfCoreRepository
             _collection = _context.Set<TEntity>();
         }
 
-        public void Add(TEntity entity)
+        public async Task AddAsync(TEntity entity)
         {
-            _collection.Add(entity);
+            await _collection.AddAsync(entity);
         }
 
         public void Delete(TEntity entity)
@@ -39,7 +39,7 @@ namespace N_TierArchitectureToDoApp.DataDomain.EfCoreRepository
             return await _collection.SingleOrDefaultAsync(expression);
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        public async Task<IList<TEntity>> GetAllAsync()
         {
             return await _collection.ToListAsync();
         }
