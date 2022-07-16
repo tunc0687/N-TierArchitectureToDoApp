@@ -9,11 +9,11 @@ namespace N_TierArchitectureToDoApp.DataDomain.EfCoreRepository
 {
     public interface IRepositoryBase<T> where T : class, new()
     {
-        void Add(T entity);
+        Task AddAsync(T entity);
         void Update(T entity);
         void Delete(T entity);
         void DeleteAll(IEnumerable<T> entities);
-        Task<IEnumerable<T>> GetAllAsync();
+        Task<IList<T>> GetAllAsync();
         Task<T?> FindAsync(Expression<Func<T, bool>> expression);
     }
 }

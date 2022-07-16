@@ -11,4 +11,10 @@
     <ProjectReference Include="..\N-TierArchitectureToDoApp.Service\N-TierArchitectureToDoApp.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="Views\" />
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>
