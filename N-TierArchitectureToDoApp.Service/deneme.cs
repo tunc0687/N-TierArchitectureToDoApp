@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace N_TierArchitectureToDoApp.Service
 {
-    internal class Class1
+    internal class deneme
     {
     }
 }
