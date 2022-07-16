@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace N_TierArchitectureToDoApp.Data.WorksRepositories
 {
-    public interface IWorkRepository : IRepositoryBase<Work>
+    public interface IWorksRepository : IRepositoryBase<Work>
     {
     }
 }

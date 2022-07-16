@@ -4,9 +4,9 @@ using N_TierArchitectureToDoApp.DataDomain.Entities;
 
 namespace N_TierArchitectureToDoApp.Data.WorksRepositories
 {
-    public class WorkRepository : RepositoryBase<Work>, IWorkRepository
+    public class WorksRepository : RepositoryBase<Work>, IWorksRepository
     {
-        public WorkRepository(ToDoAppDbContext context) : base(context)
+        public WorksRepository(ToDoAppDbContext context) : base(context)
         {
         }
     }
