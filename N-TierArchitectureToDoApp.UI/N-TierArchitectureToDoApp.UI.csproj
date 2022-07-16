@@ -7,4 +7,8 @@
     <RootNamespace>N_TierArchitectureToDoApp.UI</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\N-TierArchitectureToDoApp.Service\N-TierArchitectureToDoApp.Service.csproj" />
+  </ItemGroup>
+
 </Project>
