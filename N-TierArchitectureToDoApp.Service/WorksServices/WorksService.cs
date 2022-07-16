@@ -3,11 +3,6 @@ using N_TierArchitectureToDoApp.DataDomain.EfCoreUnitOfWork;
 using N_TierArchitectureToDoApp.DataDomain.Entities;
 using N_TierArchitectureToDoApp.Service.WorksServices.Dtos.RequestDtos;
 using N_TierArchitectureToDoApp.Service.WorksServices.Dtos.ResultDtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace N_TierArchitectureToDoApp.Service.WorksServices
 {
@@ -22,7 +17,7 @@ namespace N_TierArchitectureToDoApp.Service.WorksServices
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<int> Add(WorksAddRequest request)
+        public async Task Add(WorksAddRequest request)
         {
             Work entity = new Work
             {
@@ -30,29 +25,56 @@ namespace N_TierArchitectureToDoApp.Service.WorksServices
                 IsCompleted = request.IsCompleted,
             };
 
-            _worksRepository.Add(entity);
-            var result = await _unitOfWork.SaveChangesAsync();
-            return entity.Id;
+            await _worksRepository.AddAsync(entity);
+            await _unitOfWork.SaveChangesAsync();
         }
 
-        public Task DeleteById(int id)
+        public async Task DeleteById(int id)
         {
-            throw new NotImplementedException();
+            var entity = await _worksRepository.FindAsync(w => w.Id == id);
+            _worksRepository.Delete(entity);
+            await _unitOfWork.SaveChangesAsync();
         }
 
-        public Task<List<WorksListResult>> GetAll()
+        public async Task<List<WorksListResult>> GetAll()
         {
-            throw new NotImplementedException();
+            var list = await _worksRepository.GetAllAsync();
+            var workList = new List<WorksListResult>();
+            if (list != null && list.Count > 0)
+            {
+                foreach (var work in list)
+                {
+                    workList.Add(new WorksListResult
+                    {
+                        Id = work.Id,
+                        Description = work.Description,
+                        IsCompleted = work.IsCompleted,
+                    });
+                }
+            }
+            return workList;
         }
 
-        public Task<WorksGetByIdResult> GetById(int id)
+        public async Task<WorksGetByIdResult> GetById(int id)
         {
-            throw new NotImplementedException();
+            var entity = await _worksRepository.FindAsync(w => w.Id == id);
+            return new WorksGetByIdResult
+            {
+                Description = entity.Description,
+                IsCompleted = entity.IsCompleted,
+            };
         }
 
-        public Task UpdateById(int id, WorksUpdateByIdRequest request)
+        public async Task UpdateById(WorksUpdateByIdRequest request)
         {
-            throw new NotImplementedException();
+            var entity = await _worksRepository.FindAsync(w => w.Id == request.Id);
+
+            entity.Description = request.Description;
+            entity.IsCompleted = request.IsCompleted;
+
+            _worksRepository.Update(entity);
+
+            await _unitOfWork.SaveChangesAsync();
         }
     }
 }
