@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using N_TierArchitectureToDoApp.DataDomain.Entities;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace N_TierArchitectureToDoApp.DataDomain.EfCoreRepository
 {
-    public interface IRepositoryBase<T> where T : class, new()
+    public interface IRepositoryBase<T> where T : BaseEntity, new()
     {
         Task AddAsync(T entity);
         void Update(T entity);

@@ -11,9 +11,9 @@ namespace N_TierArchitectureToDoApp.Service.WorksServices
     public interface IWorksService
     {
         Task Add(WorksAddRequest request);
-        Task UpdateById(WorksUpdateByIdRequest request);
+        Task Update(WorksUpdateRequest request);
         Task DeleteById(int id);
-        Task<WorksGetByIdResult> GetById(int id);
+        Task<WorksListResult> GetById(int id);
         Task<List<WorksListResult>> GetAll();
     }
 }

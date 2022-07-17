@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 //builder.Services.AddRazorPages();
+builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ToDoAppDbContext>(options => options.UseSqlServer(builder.Configuration.GetValue<string>("DatabaseSettings:ConnectionString")), ServiceLifetime.Scoped);
 
@@ -26,7 +27,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
+//app.UseAuthorization();
 
 //app.MapRazorPages();
 
