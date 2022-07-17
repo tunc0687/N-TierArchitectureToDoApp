@@ -1,0 +1,39 @@
+﻿@model List<WorksListResult>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>To Do App</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container my-2">
+        <div class="text-end my-2">
+            <a asp-action="Create" asp-controller="Home">Create Work</a>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Work No</th>
+                    <th>Work To Do</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var work in Model)
+                {
+                    <tr>
+                        <td>@(Model.IndexOf(work) + 1)</td>
+                        <td>@work.Description</td>
+                        <td>@(work.IsCompleted ? "Tamamlandı" : "Tamamlanmadı")</td>
+                        <td>
+                            <a class="btn btn-warning" asp-action="Update" asp-controller="Home" asp-route-id="@work.Id">Update</a>
+                            <a class="btn btn-danger" asp-action="Delete" asp-controller="Home" asp-route-id="@work.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

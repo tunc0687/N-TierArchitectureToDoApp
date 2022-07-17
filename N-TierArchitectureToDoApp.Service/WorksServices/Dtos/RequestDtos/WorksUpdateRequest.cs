@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace N_TierArchitectureToDoApp.Service.WorksServices.Dtos.ResultDtos
+namespace N_TierArchitectureToDoApp.Service.WorksServices.Dtos.RequestDtos
 {
-    public class WorksGetByIdResult
+    public class WorksUpdateRequest
     {
+        public int Id { get; set; }
         public string Description { get; set; }
         public bool IsCompleted { get; set; }
     }
