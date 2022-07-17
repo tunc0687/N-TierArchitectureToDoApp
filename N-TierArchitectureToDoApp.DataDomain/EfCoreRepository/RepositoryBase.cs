@@ -1,14 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using N_TierArchitectureToDoApp.DataDomain.Entities;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace N_TierArchitectureToDoApp.DataDomain.EfCoreRepository
 {
-    public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : class, new()
+    public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : BaseEntity, new()
     {
         private readonly DbContext _context;
         public readonly DbSet<TEntity> _collection;
@@ -46,7 +42,12 @@ namespace N_TierArchitectureToDoApp.DataDomain.EfCoreRepository
 
         public void Update(TEntity entity)
         {
-            _collection.Update(entity);
+            //_collection.Update(entity);
+
+            var updatedEntity = _collection.SingleOrDefault(w => w.Id == entity.Id);
+
+            _context.Entry(updatedEntity).CurrentValues.SetValues(entity);
+
         }
     }
 }

@@ -55,17 +55,18 @@ namespace N_TierArchitectureToDoApp.Service.WorksServices
             return workList;
         }
 
-        public async Task<WorksGetByIdResult> GetById(int id)
+        public async Task<WorksListResult> GetById(int id)
         {
             var entity = await _worksRepository.FindAsync(w => w.Id == id);
-            return new WorksGetByIdResult
+            return new WorksListResult
             {
+                Id = entity.Id,
                 Description = entity.Description,
                 IsCompleted = entity.IsCompleted,
             };
         }
 
-        public async Task UpdateById(WorksUpdateByIdRequest request)
+        public async Task Update(WorksUpdateRequest request)
         {
             var entity = await _worksRepository.FindAsync(w => w.Id == request.Id);
 
