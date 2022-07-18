@@ -1,4 +1,5 @@
-﻿using N_TierArchitectureToDoApp.Data.WorksRepositories;
+﻿using AutoMapper;
+using N_TierArchitectureToDoApp.Data.WorksRepositories;
 using N_TierArchitectureToDoApp.DataDomain.EfCoreUnitOfWork;
 using N_TierArchitectureToDoApp.DataDomain.Entities;
 using N_TierArchitectureToDoApp.Service.WorksServices.Dtos.RequestDtos;
@@ -10,22 +11,18 @@ namespace N_TierArchitectureToDoApp.Service.WorksServices
     {
         private readonly IWorksRepository _worksRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public WorksService(IWorksRepository worksRepository, IUnitOfWork unitOfWork)
+        public WorksService(IWorksRepository worksRepository, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _worksRepository = worksRepository;
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public async Task Add(WorksAddRequest request)
         {
-            Work entity = new Work
-            {
-                Description = request.Description,
-                IsCompleted = request.IsCompleted,
-            };
-
-            await _worksRepository.AddAsync(entity);
+            await _worksRepository.AddAsync(_mapper.Map<Work>(request));
             await _unitOfWork.SaveChangesAsync();
         }
 
@@ -38,32 +35,12 @@ namespace N_TierArchitectureToDoApp.Service.WorksServices
 
         public async Task<List<WorksListResult>> GetAll()
         {
-            var list = await _worksRepository.GetAllAsync();
-            var workList = new List<WorksListResult>();
-            if (list != null && list.Count > 0)
-            {
-                foreach (var work in list)
-                {
-                    workList.Add(new WorksListResult
-                    {
-                        Id = work.Id,
-                        Description = work.Description,
-                        IsCompleted = work.IsCompleted,
-                    });
-                }
-            }
-            return workList;
+            return _mapper.Map<List<WorksListResult>>(await _worksRepository.GetAllAsync());
         }
 
         public async Task<WorksListResult> GetById(int id)
         {
-            var entity = await _worksRepository.FindAsync(w => w.Id == id);
-            return new WorksListResult
-            {
-                Id = entity.Id,
-                Description = entity.Description,
-                IsCompleted = entity.IsCompleted,
-            };
+            return _mapper.Map<WorksListResult>(await _worksRepository.FindAsync(w => w.Id == id));
         }
 
         public async Task Update(WorksUpdateRequest request)
