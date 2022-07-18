@@ -1,7 +1,9 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using N_TierArchitectureToDoApp.Data.WorksRepositories;
 using N_TierArchitectureToDoApp.DataDomain.DbContexts;
 using N_TierArchitectureToDoApp.DataDomain.EfCoreUnitOfWork;
+using N_TierArchitectureToDoApp.Service.Mappings;
 using N_TierArchitectureToDoApp.Service.WorksServices;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +13,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ToDoAppDbContext>(options => options.UseSqlServer(builder.Configuration.GetValue<string>("DatabaseSettings:ConnectionString")), ServiceLifetime.Scoped);
+
+var configuration = new MapperConfiguration(opt =>
+{
+    opt.AddProfile(new WorkProfile());
+});
+
+var mapper = configuration.CreateMapper();
+
+builder.Services.AddSingleton<IMapper>(mapper);
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IWorksService, WorksService>();
