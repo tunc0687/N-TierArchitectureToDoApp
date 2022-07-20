@@ -40,14 +40,9 @@ namespace N_TierArchitectureToDoApp.DataDomain.EfCoreRepository
             return await _collection.ToListAsync();
         }
 
-        public void Update(TEntity entity)
+        public void Update(TEntity entity, TEntity unchangedEntity)
         {
-            //_collection.Update(entity);
-
-            var updatedEntity = _collection.SingleOrDefault(w => w.Id == entity.Id);
-
-            _context.Entry(updatedEntity).CurrentValues.SetValues(entity);
-
+            _context.Entry(unchangedEntity).CurrentValues.SetValues(entity);
         }
     }
 }
