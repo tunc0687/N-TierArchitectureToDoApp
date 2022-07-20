@@ -1,10 +1,11 @@
-using AutoMapper;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using N_TierArchitectureToDoApp.Data.WorksRepositories;
 using N_TierArchitectureToDoApp.DataDomain.DbContexts;
 using N_TierArchitectureToDoApp.DataDomain.EfCoreUnitOfWork;
-using N_TierArchitectureToDoApp.Service.Mappings;
+using N_TierArchitectureToDoApp.Service.ValidationRules.FluentValidation;
 using N_TierArchitectureToDoApp.Service.WorksServices;
+using N_TierArchitectureToDoApp.Service.WorksServices.Dtos.RequestDtos;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,18 +15,16 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ToDoAppDbContext>(options => options.UseSqlServer(builder.Configuration.GetValue<string>("DatabaseSettings:ConnectionString")), ServiceLifetime.Scoped);
 
-var configuration = new MapperConfiguration(opt =>
-{
-    opt.AddProfile(new WorkProfile());
-});
-
-var mapper = configuration.CreateMapper();
-
-builder.Services.AddSingleton<IMapper>(mapper);
-
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IWorksService, WorksService>();
 builder.Services.AddScoped<IWorksRepository, WorksRepository>();
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddTransient<IValidator<WorksAddRequest>, WorksAddRequestValidator>();
+builder.Services.AddTransient<IValidator<WorksUpdateRequest>, WorksUpdateRequestValidator>();
+
+//builder.Services.AddValidatorsFromAssemblyContaining<WorksAddRequestValidator>();
 
 var app = builder.Build();
 
