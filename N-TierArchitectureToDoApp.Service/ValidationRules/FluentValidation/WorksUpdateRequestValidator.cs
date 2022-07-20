@@ -7,7 +7,7 @@ namespace N_TierArchitectureToDoApp.Service.ValidationRules.FluentValidation
     {
         public WorksUpdateRequestValidator()
         {
-            RuleFor(x => x.Description).NotEmpty().WithMessage("Açıklama boş geçilemez");
+            RuleFor(x => x.Description).NotEmpty().WithMessage("Update Açıklama boş geçilemez");
 
             RuleFor(x => x.Id).NotEmpty();
         }

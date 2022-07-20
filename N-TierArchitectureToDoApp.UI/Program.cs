@@ -21,10 +21,10 @@ builder.Services.AddScoped<IWorksRepository, WorksRepository>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddTransient<IValidator<WorksAddRequest>, WorksAddRequestValidator>();
-builder.Services.AddTransient<IValidator<WorksUpdateRequest>, WorksUpdateRequestValidator>();
+//builder.Services.AddTransient<IValidator<WorksAddRequest>, WorksAddRequestValidator>();
+//builder.Services.AddTransient<IValidator<WorksUpdateRequest>, WorksUpdateRequestValidator>();
 
-//builder.Services.AddValidatorsFromAssemblyContaining<WorksAddRequestValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<WorksAddRequestValidator>();
 
 var app = builder.Build();
 

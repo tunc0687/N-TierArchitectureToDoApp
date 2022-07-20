@@ -38,8 +38,12 @@ namespace N_TierArchitectureToDoApp.Service.WorksServices
         public async Task DeleteById(int id)
         {
             var entity = await _worksRepository.FindAsync(w => w.Id == id);
-            _worksRepository.Delete(entity);
-            await _unitOfWork.SaveChangesAsync();
+            if (entity != null)
+            {
+                _worksRepository.Delete(entity);
+
+                await _unitOfWork.SaveChangesAsync();
+            }
         }
 
         public async Task<List<WorksListResult>> GetAll()
@@ -57,14 +61,16 @@ namespace N_TierArchitectureToDoApp.Service.WorksServices
             var validation = await _worksUpdateValidator.ValidateAsync(request);
             if (validation.IsValid)
             {
-                var entity = await _worksRepository.FindAsync(w => w.Id == request.Id);
+                var unchangedEntity = await _worksRepository.FindAsync(w => w.Id == request.Id);
 
-                entity.Description = request.Description;
-                entity.IsCompleted = request.IsCompleted;
+                if (unchangedEntity != null)
+                {
+                    var entity = _mapper.Map<Work>(request);
 
-                _worksRepository.Update(entity);
+                    _worksRepository.Update(entity, unchangedEntity);
 
-                await _unitOfWork.SaveChangesAsync();
+                    await _unitOfWork.SaveChangesAsync();
+                }
             }
         }
     }
