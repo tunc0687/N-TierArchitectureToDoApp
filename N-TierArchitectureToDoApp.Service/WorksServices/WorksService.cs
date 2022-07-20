@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using N_TierArchitectureToDoApp.Data.WorksRepositories;
 using N_TierArchitectureToDoApp.DataDomain.EfCoreUnitOfWork;
 using N_TierArchitectureToDoApp.DataDomain.Entities;
@@ -12,18 +13,26 @@ namespace N_TierArchitectureToDoApp.Service.WorksServices
         private readonly IWorksRepository _worksRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IValidator<WorksUpdateRequest> _worksUpdateValidator;
+        private readonly IValidator<WorksAddRequest> _worksAddValidator;
 
-        public WorksService(IWorksRepository worksRepository, IUnitOfWork unitOfWork, IMapper mapper)
+        public WorksService(IWorksRepository worksRepository, IUnitOfWork unitOfWork, IMapper mapper, IValidator<WorksUpdateRequest> worksUpdateValidator, IValidator<WorksAddRequest> worksAddValidator)
         {
             _worksRepository = worksRepository;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _worksUpdateValidator = worksUpdateValidator;
+            _worksAddValidator = worksAddValidator;
         }
 
         public async Task Add(WorksAddRequest request)
         {
-            await _worksRepository.AddAsync(_mapper.Map<Work>(request));
-            await _unitOfWork.SaveChangesAsync();
+            var validation = await _worksAddValidator.ValidateAsync(request);
+            if (validation.IsValid)
+            {
+                await _worksRepository.AddAsync(_mapper.Map<Work>(request));
+                await _unitOfWork.SaveChangesAsync();
+            }
         }
 
         public async Task DeleteById(int id)
@@ -45,14 +54,18 @@ namespace N_TierArchitectureToDoApp.Service.WorksServices
 
         public async Task Update(WorksUpdateRequest request)
         {
-            var entity = await _worksRepository.FindAsync(w => w.Id == request.Id);
+            var validation = await _worksUpdateValidator.ValidateAsync(request);
+            if (validation.IsValid)
+            {
+                var entity = await _worksRepository.FindAsync(w => w.Id == request.Id);
 
-            entity.Description = request.Description;
-            entity.IsCompleted = request.IsCompleted;
+                entity.Description = request.Description;
+                entity.IsCompleted = request.IsCompleted;
 
-            _worksRepository.Update(entity);
+                _worksRepository.Update(entity);
 
-            await _unitOfWork.SaveChangesAsync();
+                await _unitOfWork.SaveChangesAsync();
+            }
         }
     }
 }
