@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\N-TierArchitectureToDoApp.Core\N-TierArchitectureToDoApp.Core.csproj" />
     <ProjectReference Include="..\N-TierArchitectureToDoApp.Service\N-TierArchitectureToDoApp.Service.csproj" />
   </ItemGroup>
 

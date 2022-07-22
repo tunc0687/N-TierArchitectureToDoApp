@@ -28,12 +28,8 @@ namespace N_TierArchitectureToDoApp.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(WorksAddRequest request)
         {
-            if (ModelState.IsValid)
-            {
-                await _worksService.Add(request);
-                return RedirectToAction("Index");
-            }
-            return View(request);
+            await _worksService.Add(request);
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -51,12 +47,8 @@ namespace N_TierArchitectureToDoApp.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(WorksUpdateRequest request)
         {
-            if (ModelState.IsValid)
-            {
-                await _worksService.Update(request);
-                return RedirectToAction("Index");
-            }
-            return View(request);
+            await _worksService.Update(request);
+            return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Delete(int id)
